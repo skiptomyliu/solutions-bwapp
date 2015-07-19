@@ -159,3 +159,11 @@ hostheader_1.php
 hostheader_2.php
 
 ![]()
+
+### Remote & Local File Inclusion (RFI/LFI)
+
+Copy rfi.txt to rfi.php, it appears PHP automatically adds the suffix .php. 
+```
+bWAPP/rlfi.php?language=../evil/rfi
+```
+
