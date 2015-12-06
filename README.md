@@ -1,5 +1,5 @@
 # solutions-bwapp
-Rough solutions
+In progress rough solutions.  This is not a comprehensive solution list.  Updating whenever I have the time.
 
 Ref sheet
 http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet
