@@ -191,7 +191,9 @@ bWAPP/insecure_direct_object_ref_2.php
 
 Use Burp to unhide hidden ticket price field, or use proxy to modify the POST param while in transit.
 
-# A5 - Cross-Site Tracing (XST) 
+# A5 - Security Misconfiguration
+
+### Cross-Site Tracing (XST) 
 
 Doesn't work on modern browsers as there are security enforcements.  Maybe use phantomJS?
 
@@ -231,6 +233,51 @@ function foo()
 xmlhttp.open("GET","/bWAPP/",true);
 // xmlhttp.withCredentials = true;
 xmlhttp.send();
+```
+
+### Insecure FTP Configuration
+
+Anonymous login with write permissions are enabled
+```
+$ ftp 192.168.1.9
+Connected to 192.168.1.9.
+anonymous
+220 ProFTPD 1.3.1 Server (bee-box) [192.168.1.9]
+Name (192.168.1.9:dean): 331 Anonymous login ok, send your complete email address as your password
+Password:
+230 Anonymous access granted, restrictions apply
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> dir
+229 Entering Extended Passive Mode (|||42936|)
+150 Opening ASCII mode data connection for file list
+-rw-rw-r--   1 root     www-data   543803 Nov  2  2014 Iron_Man.pdf
+-rw-rw-r--   1 root     www-data   462949 Nov  2  2014 Terminator_Salvation.pdf
+-rw-rw-r--   1 root     www-data   544600 Nov  2  2014 The_Amazing_Spider-Man.pdf
+-rw-rw-r--   1 root     www-data   526187 Nov  2  2014 The_Cabin_in_the_Woods.pdf
+-rw-rw-r--   1 root     www-data   756522 Nov  2  2014 The_Dark_Knight_Rises.pdf
+-rw-rw-r--   1 root     www-data   618117 Nov  2  2014 The_Incredible_Hulk.pdf
+-rw-rw-r--   1 root     www-data  5010042 Nov  2  2014 bWAPP_intro.pdf
+226 Transfer complete
+ftp> puts test.txt
+?Invalid command.
+ftp> put test.txt
+local: test.txt remote: test.txt
+229 Entering Extended Passive Mode (|||28299|)
+150 Opening BINARY mode data connection for test.txt
+     0        0.00 KiB/s
+226 Transfer complete
+ftp> ^D
+221 Goodbye.
+```
+
+### Insecure SNMP Configuration
+
+Default community strings are set on the machine
+
+```
+$ snmpwalk -v2c -c private bwapp-server
+$ snmpwalk -v2c -c public bwapp-server
 ```
 
 # A6 - Sensitive Data Exposure 
