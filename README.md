@@ -353,9 +353,14 @@ bWAPP/rlfi.php?language=../evil/rfi
 
 # A8 - Cross-Site Request Forgery (CSRF)
 
+Reference the HTML files in resources directory.  You can modify these to auto execute in a hidden iframe as an exercise.  If bWAPP had CSRF mitigations (such as utilization of tokens), then the POST requests made from the csrf_x.html files would respond with forbidden.
+
 ### Cross-Site Request Forgery (Change Password)
 Please reference [csrf_1.html](resources/csrf_1.html).  Replace the address within the HTML with your own bWAPP server and run the form to change the password.  If CSRF tokens were utilized, then the server should return forbidden.  
 
 ### Cross-Site Request Forgery (Change Secret)
 Please references [csrf_2.html](resources/csrf_2.html).  Again, replace the address within the HTML with your own bWAPP server to change the secret.
+
+### Cross-Site Request Forgery (Transfer Amount)
+Please references [csrf_3.html](resources/csrf_3.html).  Again, replace the address within the HTML with your own bWAPP server to change the secret.
 

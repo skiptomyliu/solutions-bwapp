@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html><head>
+<div id="main">
+    
+    <h1>CSRF (Transfer Amount)</h1>
+
+    <p>Amount on your account: <b> 1000 EUR</b></p>
+
+    <form action="http://192.168.1.9/bWAPP/csrf_2.php" method="GET">
+
+        <p><label for="account">Account to transfer:</label><br>
+        <input id="account" name="account" value="123-45678-90" type="text"></p>
+
+        <p><label for="amount">Amount to transfer:</label><br>
+        <input id="amount" name="amount" value="0" type="text"></p>
+
+        <button type="submit" name="action" value="transfer">Transfer</button>   
+    </form>
+</div>
+    
+</body></html>
