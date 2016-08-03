@@ -178,7 +178,7 @@ xss_ajax_2-1.php
 ### XSS - Reflected (AJAX/XML)
 xss_ajax_1-1.php
 ```
-&lt;img src="#" onerror="alert(1)"&gt;
+&lt;img src=&apos;#&apos; onerror=&apos;alert(1)&apos;&gt;
 ```
 
 Alternatively I was able to get XSS to execute on the AJAX called.
