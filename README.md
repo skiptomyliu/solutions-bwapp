@@ -175,6 +175,15 @@ Content-Length: 34
 login=bee&password=bug&form=submit
 ```
 
+### Broken Auth. - Logout Management
+Open second tab and logout. Second tab will still have session.
+
+### Session Mgmt. - Administrative Portals
+In URL and Cookies
+```
+admin=1
+```
+
 # A3 - Cross-Site Scripting (XSS) 
 
 ### XSS - Reflected (GET)
