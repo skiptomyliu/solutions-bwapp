@@ -451,6 +451,12 @@ Copy rfi.txt to rfi.php, it appears PHP automatically adds the suffix .php.
 bWAPP/rlfi.php?language=../evil/rfi
 ```
 
+### Restrict Device Access
+Modify request
+```
+User-Agent: Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19 
+```
+
 # A8 - Cross-Site Request Forgery (CSRF)
 
 Reference the HTML files in resources directory.  You can modify these to auto execute in a hidden iframe as an exercise.  If bWAPP had CSRF mitigations (such as utilization of tokens), then the POST requests made from the csrf_x.html files would respond with forbidden.
