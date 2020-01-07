@@ -3,7 +3,6 @@ In progress rough solutions.  This is not a comprehensive solution list.  Updati
 
 Ref sheet
 http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet
-http://www.sqlinjectionwiki.com/Categories/2/mysql-sql-injection-cheat-sheet/
 
 # Contributors
 [@mmmds](https://github.com/mmmds)
